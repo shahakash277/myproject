@@ -42,10 +42,7 @@ def EditRequest(request):
 def SignupRequest(request):
     if request.method == 'POST':
         edit_form = ProfileEditForm(data=request.POST)
-        if edit_form.is_valid():
-            return redirect('/edit')
-        else:
-            return render(request, "login.html", {'form': edit_form})
+        return render(request, "signup.html")
     else:
         edit_form = ProfileEditForm()
-        return render(request, 'edit.html', {'form': edit_form})
+        return render(request, 'signup.html')

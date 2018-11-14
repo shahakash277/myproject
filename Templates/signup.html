@@ -1,20 +1,17 @@
-body {
-  background-image: linear-gradient(to left top, #17a2b8, #14abc4, #12b3d1, #11bcde, #12c5eb);
-  height: 100vh;
-}
-#login .container #login-row #login-column .login-box {
-  margin-top: 120px;
-  max-width: 600px;
-  height: 320px;
-  border: 1px solid #9C9C9C;
-  background-image: linear-gradient(to bottom, #aec1c3, #a9b5b7, #bcc5c6, #cfd5d5, #e3e5e5);
-}
-#login .container #login-row #login-column .login-box #login-form {
-  padding: 20px;
-}
-#login .container #login-row #login-column .login-box #login-form #register-link {
-  margin-top: -85px;
-}
+<!doctype html>
+<html>
+<head>
+	<title>Clothing Order Form Responsive widget Template :: w3layouts</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- font files -->
+	<link href="//fonts.googleapis.com/css?family=Asap:400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+	<!-- /font files -->
+    {% load static %}
+    <style type="text/css">
 
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
 article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
@@ -226,27 +223,6 @@ input[type=radio]:checked ~ label{
 }
 /*-- //placeholder --*/
 /*-- copyright --*/
-p.copyright {
-    font-size: 15px;
-    text-align: center;
-    color: #fff;
-    margin:39px 0;
-    letter-spacing: 2px;
-}
-p.copyright a {
-    color:#36d4f4;
-    transition: all 0.5s ease-in-out;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-}
-p.copyright a:hover {
-    color:#fff;
-    transition: all 0.5s ease-in-out;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-}
 /*-- //copyright --*/
 
 /*--responsive--*/
@@ -515,3 +491,85 @@ p.copyright a:hover {
 }
 
 /*--//responsive--*/
+    </style>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script type="text/javascript">
+        google.maps.event.addDomListener(window, 'load', function () {
+            var places = new google.maps.places.Autocomplete(document.getElementById('txtPlaces'));
+            google.maps.event.addListener(places, 'place_changed', function () {
+                var place = places.getPlace();
+                var address = place.formatted_address;
+                var latitude = place.geometry.location.B;
+                var longitude = place.geometry.location.k;
+                var mesg = "Address: " + address;
+                mesg += "\nLatitude: " + latitude;
+                mesg += "\nLongitude: " + longitude;
+                alert(mesg);
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+	<h1 class="header-w3l">Signup Form</h1>
+	<div class="content-agile">
+		<div class="form-main">
+			<form action="#" method="post">
+				<div class="content-agile-three1">
+					<div class="grid-shop1-agile">
+						<div class="form-control-w3">
+							<label class="header-w3l">Email</label>
+							<input type="text" name="name" placeholder="Name" title="Please enter your Full Name" required="">
+						</div>
+						<div class="form-control-w3">
+							<label class="header-w3l">First Name</label>
+							<input type="email" name="email" placeholder="Mail@example.com" title="Please enter a Valid Email Address" required="">
+						</div>
+                        <div class="form-control-w3">
+							<label class="header-w3l">Last Name</label>
+							<input type="text" name="name" placeholder="Name" title="Please enter your Full Name" required="">
+						</div>
+						<div class="form-control-w3">
+							<label class="header-w3l">Contact Number</label>
+							<input type="text" name="number" placeholder="xxx xxx xxxx" title="Please enter your Phone Number" required="">
+						</div>
+                        <div class="form-control-w3">
+							<label class="header-w3l">Date of Birth</label>
+							<input type="text" name="number" placeholder="xxx xxx xxxx" title="Please enter your Phone Number" required="">
+						</div>
+
+                    </div>
+				</div>
+				<div class="form-main-1">
+					<div class="form-control-w3">
+                          <div class="form-control-w3">
+							<label class="header-w3l">password</label>
+							<input type="text" name="number" placeholder="xxx xxx xxxx" title="Please enter your Phone Number" required="">
+						</div>
+                        <div class="form-control-w3">
+							<label class="header-w3l">Confirm password</label>
+							<input type="text" name="number" placeholder="xxx xxx xxxx" title="Please enter your Phone Number" required="">
+						</div>
+
+						<label class="header-w3l ">Delivery Address</label>
+                         <input type="text" id="txtPlaces" style="width: 250px" />
+						<input type="text" name="name" placeholder="Address" title="Please enter your Address" required="">
+						<input type="text" name="name" placeholder="Line" title="Please enter your Line" required="">
+						<input type="text" name="name" placeholder="City" title="Please enter your City" required="">
+						<input type="text" name="name" placeholder="Zip code" title="Please enter your Zip code" required="">
+					</div>
+					<div class="threesubmitaits" style="align-text:center">
+						<input type="submit" name="submit" value="Sign Up">
+					</div>
+				</div>
+				<div class="clear"></div>
+			</form>
+		</div>
+		<div class="clear"></div>
+	</div>
+
+</body>
+
+</html>
