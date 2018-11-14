@@ -22,7 +22,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('edit/', views.ProfileEditForm, name='edit'),
-    path('login/',views.LoginForm)
+    path('edit/', views.EditRequest, name='edit.html'),
+    path('login/', views.LoginRequest),
+    path('signup/',views.SignupRequest)
 ]
 static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
