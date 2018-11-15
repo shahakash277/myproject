@@ -19,11 +19,14 @@ from webapp import views
 from django.conf.urls.static import static
 from django.conf import settings
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('edit/', views.EditRequest, name='edit.html'),
     path('login/', views.LoginRequest),
-    path('signup/',views.SignupRequest)
+    path('signup/',views.SignupRequest),
+    path('list/', views.ListRequest),
+    path('', views.LoginRequest),
+    path('logout/', views.LogOutResponse),
 ]
+
 static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

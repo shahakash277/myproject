@@ -1,10 +1,599 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-    <title>Edit</title>
+	<title>Clothing Order Form Responsive widget Template :: w3layouts</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+	<!-- font files -->
+	<link href="//fonts.googleapis.com/css?family=Asap:400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+	<!-- /font files -->
+    {% load static %}
+    <style type="text/css">
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
+ol,ul{list-style:none;margin:0px;padding:0px;}
+blockquote,q{quotes:none;}
+blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
+table{border-collapse:collapse;border-spacing:0;}
+/* start editing from here */
+a{text-decoration:none;}
+.txt-rt{text-align:right;}/* text align right */
+.txt-lt{text-align:left;}/* text align left */
+.txt-center{text-align:center;}/* text align center */
+.float-rt{float:right;}/* float right */
+.float-lt{float:left;}/* float left */
+.clear{clear:both;}/* clear float */
+.pos-relative{position:relative;}/* Position Relative */
+.pos-absolute{position:absolute;}/* Position Absolute */
+.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
+.vertical-top{	vertical-align:top;}/* vertical align top */
+nav.vertical ul li{	display:block;}/* vertical menu */
+nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
+img{max-width:100%;}
+/*end reset*/
+h1,h2,h3,h4,h5,h6,input,p,a,select,button,textarea{
+	margin:0;
+}
+ul,label{
+	margin:0;
+	padding:0;
+}
+body a:hover,body a{
+	text-decoration:none;
+}
+
+/*--- end reset code ---*/
+
+h1.header-w3l {
+    text-align: center;
+    font-size: 50px;
+    margin:23px 0 32px;
+    color: #fff;
+    letter-spacing: 1px;
+    font-style: italic;
+}
+.content-agile{
+    width: 52%;
+    margin: 0 auto;
+    background-color: rgba(21, 20, 20, 0.53);
+    padding: 50px;
+}
+.content-agile-three1 {
+    float: left;
+    width: 45%;
+    margin-right: 5%;
+}
+.form-main-1 {
+    float: left;
+    width: 50%;
+}
+label.header-w3l {
+    font-size: 17px;
+    color: #fff;
+    text-align: justify;
+    letter-spacing: 1px;
+    float: left;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.form-control-w3 input[type="email"], .form-control-w3 input[type="text"],.form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"], .form-sub-1-w3l input, .form-sub-1-w3l select{
+    border: none;
+    color: #fff;
+    outline: none;
+    letter-spacing: 1px;
+    font-size: 14px;
+    background-color: rgba(251, 250, 250, 0.38);
+    padding: 13px 12px;
+    width: 93.5%;
+    margin-bottom: 16px;
+}
+.form-sub-1-w3l select {
+    width:100%;
+}
+.form-sub-1-w3l select option{
+    color:#000;
+}
+.form-product-1-w3l.sub2form {
+    margin-top: 18px;
+}
+.content-agile-three2 {
+    margin-top: 10px;
+}
+label.rating-w3l, h2.rating-w3l {
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 1px;
+    position: relative;
+}
+.threesubmitaits input[type="submit"] {
+    padding: 12px 47px;
+    font-size: 15px;
+    color: #fff;
+    border: none;
+    outline: none;
+    background: #36d4f4;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+.threesubmitaits input[type="submit"]:hover{
+    background: #000;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+.form-sub-1-w3l {
+    float: left;
+    width: 31%;
+}
+.form-sub-1-w3l input{
+    width:79%;
+}
+.form-sub-1-w3l.formtwo {
+    margin: 0 10px;
+}
+/*-- radio button --*/
+ul li label {
+    display: inline-block;
+    position: relative;
+    font-weight: 300;
+    text-transform: capitalize;
+    font-size: 16px;
+    padding: 13px 0 0 50px;
+    margin: 4px auto;
+    height: 24px;
+    letter-spacing: 1px;
+    z-index: 9;
+    cursor: pointer;
+}
+ul li .check{
+	display: block;
+    position: absolute;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    height: 12px;
+    width: 12px;
+    top: 17px;
+    left: 15px;
+    z-index: 5;
+    transition: border .25s linear;
+    -webkit-transition: border .25s linear;
+}
+ul li .check::before {
+    display: block;
+    position: absolute;
+    content: '';
+    border-radius: 100%;
+    height: 4px;
+    width: 4px;
+    top: 4px;
+    left: 4px;
+    margin: auto;
+    transition: background 0.25s linear;
+    -webkit-transition: background 0.25s linear;
+}
+span {
+    color: black;
+}
+.grid-shop1-agile ul li,.grid-shop2-agile ul li{
+	color: #fff;
+    display: block;
+    position: relative;
+    height: 40px;
+}
+ul li input[type=radio]{
+	position: absolute;
+	visibility: hidden;
+}
+ul li:hover label{
+	color: #FFFFFF;
+}
+ul li:hover .check {
+	border: 2px solid #FFFFFF;
+}
+input[type=radio]:checked ~ .check {
+	border: 2px solid #36d4f4;
+}
+input[type=radio]:checked ~ .check::before{
+	background: #36d4f4;
+}
+input[type=radio]:checked ~ label{
+	color: #36d4f4;
+}
+/*-- //radio button --*/
+/*-- placeholder --*/
+::-webkit-input-placeholder {
+    color:#eee;
+}
+:-moz-placeholder { /* Firefox 18- */
+    color:#eeeeee;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+    color:#eee;
+}
+/*-- //placeholder --*/
+/*-- copyright --*/
+/*-- //copyright --*/
+
+/*--responsive--*/
+@media(max-width: 1440px){
+    .content-agile{
+        width: 56%;
+    }
+}
+@media(max-width: 1366px){
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"]{
+        width: 93%;
+    }
+    .form-sub-1-w3l input {
+        width: 77%;
+    }
+}
+@media(max-width: 1280px){
+    .content-agile{
+        width: 60%;
+    }
+}
+@media(max-width: 1080px){
+    h1.header-w3l {
+        margin: 15px 0 25px;
+    }
+    .content-agile{
+        width: 70%;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"]{
+        width: 92.5%;
+    }
+    p.copyright {
+        margin: 30px 0;
+    }
+}
+@media(max-width: 1050px){
+    .content-agile{
+        width: 72%;
+    }
+}
+@media(max-width: 1024px){
+
+}
+@media(max-width: 991px){
+    .content-agile{
+        width: 73%;
+    }
+}
+@media(max-width: 900px){
+    .content-agile{
+        width: 80%;
+    }
+}
+@media(max-width: 800px){
+    h1.header-w3l {
+        font-size: 47px;
+        letter-spacing: 0px;
+    }
+    .content-agile{
+        padding: 40px;
+    }
+    .content-agile-three1 {
+        width: 47%;
+        margin-right: 3%;
+    }
+    p.copyright {
+        margin: 25px 0;
+    }
+}
+@media(max-width: 768px){
+    .content-agile{
+        width: 84%;
+    }
+}
+@media(max-width: 767px){
+
+}
+@media(max-width: 736px){
+    .content-agile{
+        width: 85%;
+        padding: 30px;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+        width: 91.5%;
+    }
+}
+@media(max-width: 667px){
+    .content-agile-three1 {
+        width: 100%;
+        margin-right: 0;
+        float: none;
+    }
+    .form-main-1 {
+        float: none;
+        width: 100%;
+    }
+    .content-agile{
+        width: 70%;
+        padding: 35px;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+        width: 94.5%;
+    }
+    .form-sub-1-w3l input {
+        width: 83%;
+    }
+    .form-sub-1-w3l {
+        width: 31.8%;
+    }
+    p.copyright {
+        font-size: 14px;
+    }
+}
+@media(max-width: 640px){
+    h1.header-w3l {
+        margin: 14px 0 20px;
+        font-size: 44px;
+    }
+}
+@media(max-width: 600px){
+    .content-agile{
+        width: 75%;
+    }
+    p.copyright {
+        letter-spacing: 1px;
+    }
+}
+@media(max-width: 568px){
+    .form-sub-1-w3l {
+        width: 31.6%;
+    }
+    .form-sub-1-w3l input {
+        width: 81%;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+        width: 94%;
+    }
+    h1.header-w3l {
+        font-size: 41px;
+    }
+}
+@media(max-width: 480px){
+    h1.header-w3l {
+        font-size: 37px;
+    }
+    .content-agile{
+        width: 80%;
+        padding: 30px;
+    }
+    label.header-w3l {
+        font-size: 15px;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"], .form-sub-1-w3l input, .form-sub-1-w3l select {
+        font-size: 13px;
+    }
+    label.rating-w3l, h2.rating-w3l {
+        font-size: 18px;
+    }
+    .form-sub-1-w3l {
+        width: 31.45%;
+    }
+    .form-sub-1-w3l input {
+        width: 80%;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+        width: 93.5%;
+    }
+    .threesubmitaits input[type="submit"] {
+        padding: 11px 40px;
+        font-size: 14px;
+        margin-top: 25px;
+    }
+    p.copyright {
+        margin: 12px 0;
+        line-height: 1.9;
+    }
+}
+@media(max-width: 440px){
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+        width: 93%;
+    }
+    .form-sub-1-w3l {
+        width: 31.3%;
+    }
+    .form-sub-1-w3l input {
+        width: 77%;
+    }
+}
+@media(max-width: 414px){
+    h1.header-w3l {
+        font-size: 34px;
+    }
+    .content-agile{
+        width: 75%;
+    }
+    label.header-w3l {
+        font-size: 14px;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"], .form-sub-1-w3l input, .form-sub-1-w3l select {
+        font-size: 12px;
+    }
+    .form-sub-1-w3l {
+        width: 31%;
+    }
+    .form-sub-1-w3l input {
+        width: 74%;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+        width: 91.5%;
+    }
+}
+@media(max-width: 384px){
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+        width: 91%;
+    }
+    .form-sub-1-w3l {
+        width: 30.9%;
+    }
+    .form-sub-1-w3l input {
+        width: 72%;
+    }
+    p.copyright {
+        font-size: 13px;
+    }
+}
+@media(max-width: 375px){
+    .form-sub-1-w3l {
+        width: 100%;
+    }
+    .form-sub-1-w3l.formtwo {
+        margin: 0;
+    }
+    .form-sub-1-w3l input {
+        width: 91%;
+    }
+}
+@media(max-width: 320px){
+    h1.header-w3l {
+        font-size:30px;
+        margin: 12px 0 18px;
+    }
+    .content-agile{
+        padding: 23px;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"], .form-sub-1-w3l input, .form-sub-1-w3l select {
+        padding: 12px 11px;
+        margin-bottom: 10px;
+    }
+    label.rating-w3l, h2.rating-w3l {
+        font-size: 16px;
+    }
+    .form-product-1-w3l.sub2form {
+        margin-top: 12px;
+    }
+    .threesubmitaits input[type="submit"] {
+        padding: 11px 35px;
+        font-size: 13px;
+        margin-top: 18px;
+    }
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+        width: 90%;
+    }
+    .form-sub-1-w3l input {
+        width: 90%;
+    }
+}
+
+/*--//responsive--*/
+    </style>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script type="text/javascript">
+     $( function() {
+            $( "#dateOfBirth" ).datepicker();
+      } );
+
+        google.maps.event.addDomListener(window, 'load', function () {
+            var places = new google.maps.places.Autocomplete(document.getElementById('street_number'));
+            google.maps.event.addListener(places, 'place_changed', function () {
+                var componentForm = {
+                    street_number: 'short_name',
+                    route: 'long_name',
+                    locality: 'long_name',
+                    administrative_area_level_1: 'long_name',
+                    country: 'long_name',
+                    postal_code: 'short_name'
+                };
+                var place = places.getPlace();
+                            console.log(place);
+                for (var i = 0; i < place.address_components.length; i++) {
+                    var addressType = place.address_components[i].types[0];
+                        if (componentForm[addressType]) {
+                            var val = place.address_components[i][componentForm[addressType]];
+                           	    document.getElementById(addressType).value = val;
+                        }
+                  }
+            });
+        });
+    </script>
+
 </head>
+
 <body>
-<h1>Edit your Account</h1>
+	<h1 class="header-w3l">Signup Form</h1>
+	<div class="content-agile">
+		<div class="form-main">
+			<form action="#" method="post">
+                  {% csrf_token %}
+                  {% if form.errors %}
+                        {% for field in form %}
+                              {% for error in field.errors %}
+                                   <div class="alert alert-danger">
+                                       <strong>{{ error|escape }}</strong>
+                                   </div>
+                            {% endfor %}
+                        {% endfor %}
+                {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+				<div class="content-agile-three1">
+					<div class="grid-shop1-agile">
+						<div class="form-control-w3">
+							<label class="header-w3l">Email</label>
+							{{form.email}}
+						</div>
+						<div class="form-control-w3">
+							<label class="header-w3l">First Name</label>
+						    {{form.firstName}}
+                        </div>
+                        <div class="form-control-w3">
+							<label class="header-w3l">Last Name</label>
+						    {{form.lastName}}
+							</div>
+						<div class="form-control-w3">
+							<label class="header-w3l">Contact Number</label>
+					        {{form.phoneNumber}}
+						</div>
+                        <div class="form-control-w3">
+							<label class="header-w3l">Date of Birth</label>
+                              {{form.datepicker}}
+                        </div>
+
+                    </div>
+				</div>
+				<div class="form-main-1">
+					<div class="form-control-w3">
+                         <label class="header-w3l ">Delivery Address</label>
+                        {{form.street_number}}
+                        {{form.route}}
+                        {{form.locality}}
+                        {{form.administrative_area_level_1}}
+                        {{form.country}}
+                        {{form.postal_code}}
+
+					</div>
+					<div class="threesubmitaits" style="align-text:center">
+						<input type="submit" name="submit" value="Sign Up">
+					</div>
+				</div>
+				<div class="clear"></div>
+			</form>
+		</div>
+		<div class="clear"></div>
+	</div>
 
 </body>
+
 </html>

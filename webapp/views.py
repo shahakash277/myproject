@@ -1,27 +1,20 @@
 from django.shortcuts import render, redirect
-from .forms import UserLoginForm, ProfileEditForm,SignUpForm
+from .forms import UserLoginForm, ProfileEditForm, SignUpForm
 from .models import UserProfile
-import datetime
-
-# Create your views here.
+import traceback
 from django.http import HttpResponse
 
 
-def index(request):
-    return HttpResponse("Hello")
 
-
-def edit(request):
-    context = {}
-    context['form'] = profileForm
-    return render(request, 'edit.html', {'form': profileForm})
-
-
+# Create your views here.
 def LoginRequest(request):
     if request.method == 'POST':
         login_form = UserLoginForm(data=request.POST)
         if login_form.is_valid():
-            return redirect('/edit')
+            data = login_form.cleaned_data
+            request.session['username'] = data.get('email')
+            request.session['password'] = data.get('password')
+            return redirect('/list')
         else:
             return render(request, "login.html", {'form': login_form})
     else:
@@ -30,53 +23,58 @@ def LoginRequest(request):
 
 
 def EditRequest(request):
-    if request.method == 'POST':
-        edit_form = ProfileEditForm(data=request.POST)
+    if checkIsAuthorized(request.session):
+        user=UserProfile.objects.get(email=request.session['username'])
+        edit_form = ProfileEditForm(data=request.POST,instance=user)
         if edit_form.is_valid():
-
-            return redirect('/edit')
-        else:
-            return render(request, "login.html", {'form': edit_form})
+            return redirect(request, "/list")
+        return render(request, "edit.html", {'form': edit_form})
     else:
-        edit_form = ProfileEditForm()
-        return render(request, 'edit.html', {'form': edit_form})
+        return redirect('/login')
 
-
-def toModel(signup_form):
-    userProfile =UserProfile()
-    userProfile.email=signup_form.email
-
-
-def toCreatel(signup_form):
-        data= signup_form.cleaned_data
-
-        userProfile = UserProfile()
-        userProfile.email=data.get('email')
-        userProfile.password=data.get('password')
-        userProfile.firstName=data.get('firstName')
-        userProfile.lastName=data.get('lastName')
-        userProfile.phoneNumber=data.get('phoneNumber')
-        userdate = data.get('datepicker')
-        if userdate != '':
-            userdate=datetime.datetime.strptime(userdate, "%m/%d/%Y").strftime("%Y-%m-%d")
-            userProfile.dateOfBirth=userdate
-        userProfile.street1=data.get('street_number')
-        userProfile.street2=data.get('route')
-        userProfile.street3=data.get('locality')
-        userProfile.state=data.get('administrative_area_level_1')
-        userProfile.country=data.get('country')
-        userProfile.zip=data.get('postal_code')
-        return  userProfile
 
 def SignupRequest(request):
     if request.method == 'POST':
         signup_form = SignUpForm(data=request.POST)
         if signup_form.is_valid():
-            userprofile=toCreatel(signup_form)
-            userprofile.save()
-            return render(request, "signup.html")
+            userProfile = UserProfile.toCreateModel(signup_form)
+            userProfile.save()
+            request.session['username'] = userProfile.email
+            request.session['password'] = userProfile.password
+            return redirect(request, "/list")
         else:
             return render(request, "signup.html", {'form': signup_form})
     else:
         signup_form = SignUpForm()
-        return render(request, 'signup.html',{'form':signup_form})
+        return render(request, 'signup.html', {'form': signup_form})
+
+
+def ListRequest(request):
+    if checkIsAuthorized(request.session):
+        users = UserProfile.objects.all()
+        return render(request, 'list.html', {'list_users': users})
+    else:
+        return redirect('/login')
+
+
+def checkIsAuthorized(session):
+    print('gfgfg')
+
+    if 'username' in session and 'password' in session:
+        try:
+            user = UserProfile.objects.filter(email=session['username'], password=session['password']).first()
+            if user is not None:
+                return True
+        except:
+            tb = traceback.format_exc()
+            print('ddf')
+            return HttpResponse(tb)
+
+    return False
+
+
+def LogOutResponse(request):
+    request.session['username'] = ''
+    request.session['passeord'] = ''
+    login_form = UserLoginForm()
+    return redirect('/login')

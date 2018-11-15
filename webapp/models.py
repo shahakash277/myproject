@@ -18,16 +18,21 @@ class UserProfile(models.Model):
 
     @staticmethod
     def toCreateModel(signup_form):
+        data = signup_form.cleaned_data
         userProfile = UserProfile()
-        userProfile.email=signup_form.email
-        userProfile.password=signup_form.password
-        userProfile.firstName=signup_form.firstName
-        userProfile.lastName=signup_form.lastName
-        userProfile.phoneNumber=signup_form.phoneNumber
-        userProfile.dateOfBirth=signup_form.datepicker
-        userProfile.street1=signup_form.street_number
-        userProfile.street2=signup_form.route
-        userProfile.street3=signup_form.locality
-        userProfile.state=signup_form.administrative_area_level_1
-        userProfile.country=signup_form.country
-        userProfile.zip=signup_form.postal_code
+        userProfile.email = data.get('email')
+        userProfile.password = data.get('password')
+        userProfile.firstName = data.get('firstName')
+        userProfile.lastName = data.get('lastName')
+        userProfile.phoneNumber = data.get('phoneNumber')
+        userdate = data.get('datepicker')
+        if userdate != '':
+            userdate = datetime.datetime.strptime(userdate, "%m/%d/%Y").strftime("%Y-%m-%d")
+            userProfile.dateOfBirth = userdate
+        userProfile.street1 = data.get('street_number')
+        userProfile.street2 = data.get('route')
+        userProfile.street3 = data.get('locality')
+        userProfile.state = data.get('administrative_area_level_1')
+        userProfile.country = data.get('country')
+        userProfile.zip = data.get('postal_code')
+        return userProfile
