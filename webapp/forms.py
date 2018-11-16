@@ -1,3 +1,5 @@
+import datetime
+
 from django import forms
 from .models import UserProfile
 import re
@@ -29,12 +31,10 @@ class UserLoginForm(forms.ModelForm):
         if not validateEmail(email):
             raise forms.ValidationError({'email': 'Invalid Email'})
 
-        try:
-            user = UserProfile.objects.get(email=email, password=password)
-            if user is None:
-                raise forms.ValidationError({'email': 'Invalid email or password.'})
-        except:
+        user = UserProfile.objects.filter(email=email, password=password).first()
+        if user is None:
             raise forms.ValidationError({'email': 'Invalid email or password.'})
+
         return data
 
 
@@ -68,25 +68,36 @@ class ProfileEditForm(forms.ModelForm):
         if not validateEmail(email):
             raise forms.ValidationError({'email': 'Invalid Email'})
 
-        if (password != confirmPassword):
+        if password != confirmPassword:
             data['password'] = ''
             data['confirmPassword'] = ''
             raise forms.ValidationError({'password': 'Password and Confirm Password does not Match.'})
 
-        if phoneNumber != None and len(str(phoneNumber)) != 0 and len(str(phoneNumber)) != 10:
+        if phoneNumber is not None and len(str(phoneNumber)) != 0 and len(str(phoneNumber)) != 10:
             raise forms.ValidationError({'phoneNumber': 'Phone Number is Invalid. Contain only 10 digit'})
 
         if datepicker != '' and bool(
                 re.search('^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$', datepicker)) != True:
             raise forms.ValidationError({'datepicker': 'Invalid date please Insert in mm/dd/yyyy '})
-
-        try:
-            user = UserProfile.objects.get(email=email)
-            if user is not None:
-                raise forms.ValidationError({'email': 'Invalid email or password.'})
-        except:
-            pass
         return data
+
+    def save(self, commit=True):
+        data = self.cleaned_data
+        userProfile =UserProfile.objects.filter(data.get('email')).first()
+        userProfile.firstName = data.get('firstName')
+        userProfile.lastName = data.get('lastName')
+        userProfile.phoneNumber = data.get('phoneNumber') if 'phoneNumber' in data else 0
+        userdate = data.get('datepicker')
+        if userdate != '':
+            userdate = datetime.datetime.strptime(userdate, "%m/%d/%Y").strftime("%Y-%m-%d")
+            userProfile.dateOfBirth = userdate
+        userProfile.street1 = data.get('street_number')
+        userProfile.street2 = data.get('route')
+        userProfile.street3 = data.get('locality')
+        userProfile.state = data.get('administrative_area_level_1')
+        userProfile.country = data.get('country')
+        userProfile.zip = data.get('postal_code')
+        return userProfile
 
 
 class SignUpForm(forms.ModelForm):
@@ -121,22 +132,44 @@ class SignUpForm(forms.ModelForm):
         if not validateEmail(email):
             raise forms.ValidationError({'email': 'Invalid Email'})
 
-        if (password != confirmPassword):
+        if password != confirmPassword:
             data['password'] = ''
             data['confirmPassword'] = ''
             raise forms.ValidationError({'password': 'Password and Confirm Password does not Match.'})
 
-        if phoneNumber != None and len(str(phoneNumber)) != 0 and len(str(phoneNumber)) != 10:
+        if phoneNumber is not None and len(str(phoneNumber)) != 0 and len(str(phoneNumber)) != 10:
             raise forms.ValidationError({'phoneNumber': 'Phone Number is Invalid. Contain only 10 digit'})
 
-        if  datepicker!=''  and  bool(re.search('^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$', datepicker)) !=True :
-          raise forms.ValidationError({'datepicker': 'Invalid date please Insert in mm/dd/yyyy '})
+        if datepicker != '' and bool(
+                re.search('^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$', datepicker)) != True:
+            raise forms.ValidationError({'datepicker': 'Invalid date please Insert in mm/dd/yyyy '})
 
-        try:
-            user = UserProfile.objects.get(email=email)
-            if user is not None:
-                raise forms.ValidationError({'email': 'Invalid email or password.'})
-        except:
-            pass
+        user = UserProfile.objects.filter(email=email).first()
+        if user:
+            raise forms.ValidationError({'email': 'Email Id is already Register'})
         return data
+
+    def save(self, commit=True):
+        data = self.cleaned_data
+        userProfile = UserProfile()
+        userProfile.email = data.get('email')
+        userProfile.password = data.get('password')
+        userProfile.firstName = data.get('firstName')
+        userProfile.lastName = data.get('lastName')
+        userProfile.phoneNumber = data.get('phoneNumber') if 'phoneNumber' in data else 0
+        userdate = data.get('datepicker')
+        if userdate != '':
+            userdate = datetime.datetime.strptime(userdate, "%m/%d/%Y").strftime("%Y-%m-%d")
+            userProfile.dateOfBirth = userdate
+        userProfile.street1 = data.get('street_number')
+        userProfile.street2 = data.get('route')
+        userProfile.street3 = data.get('locality')
+        userProfile.state = data.get('administrative_area_level_1')
+        userProfile.country = data.get('country')
+        userProfile.zip = data.get('postal_code')
+
+        if commit:
+            userProfile.save()
+
+
 

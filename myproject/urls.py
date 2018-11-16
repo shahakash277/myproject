@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('edit/', views.EditRequest, name='edit.html'),
     path('login/', views.LoginRequest),
-    path('signup/',views.SignupRequest),
+    path('signup/',views.SignupRequest, name='signup.html'),
     path('list/', views.ListRequest),
     path('', views.LoginRequest),
     path('logout/', views.LogOutResponse),
