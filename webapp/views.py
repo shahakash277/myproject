@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import UserLoginForm, ProfileEditForm, SignUpForm
 from .models import UserProfile
-import traceback
-from django.http import HttpResponse
 
 
 # Create your views here.
@@ -27,7 +25,10 @@ def EditRequest(request):
         if request.method=='POST':
             edit_form = ProfileEditForm(data=request.POST)
             if edit_form.is_valid():
-                return redirect(request, '/list')
+                edit_form.save()
+                return redirect('/list')
+            else:
+                return render(request, 'edit.html', {'form': edit_form})
         else :
             edit_form =ProfileEditForm(instance=user)
             return render(request, 'edit.html', {'form': edit_form})

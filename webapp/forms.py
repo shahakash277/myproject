@@ -39,65 +39,54 @@ class UserLoginForm(forms.ModelForm):
 
 
 class ProfileEditForm(forms.ModelForm):
-    datepicker = forms.CharField(required=False, widget=forms.TextInput(
+    email = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'true'}))
+    dateOfBirth = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'id': 'dateOfBirth', 'autocomplete': 'off', 'placeholder': ''}))
-    street_number = forms.CharField(required=False, widget=forms.TextInput(
+    street1 = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'id': 'street_number', 'placeholder': 'Street Address, P.O box, etc.'}))
-    route = forms.CharField(required=False,
-                            widget=forms.TextInput(attrs={'id': 'route', 'placeholder': 'Apt, Suite, Unit, etc.'}))
-    locality = forms.CharField(required=False,
-                               widget=forms.TextInput(attrs={'id': 'locality', 'placeholder': 'Area, Region.'}))
-    administrative_area_level_1 = forms.CharField(required=False, widget=forms.TextInput(
+    street2 = forms.CharField(required=False,
+                              widget=forms.TextInput(attrs={'id': 'route', 'placeholder': 'Apt, Suite, Unit, etc.'}))
+    street3 = forms.CharField(required=False,
+                              widget=forms.TextInput(attrs={'id': 'locality', 'placeholder': 'Area, Region.'}))
+    state = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'id': 'administrative_area_level_1', 'placeholder': 'ity, Village'}))
     country = forms.CharField(required=False, widget=forms.TextInput(attrs={'id': 'country', 'placeholder': 'Conutry'}))
-    postal_code = forms.CharField(required=False, widget=forms.TextInput(
+    zip = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'id': 'postal_code', 'placeholder': 'zip code, postal code.'}))
 
     class Meta:
         model = UserProfile
         fields = '__all__'
+        exclude = ['password']
 
     def clean(self):
         data = self.cleaned_data
-        email = data.get('email')
-        password = data.get('password')
-        confirmPassword = data.get('confirmPassword')
         phoneNumber = data.get('phoneNumber')
-        datepicker = data.get('datepicker')
-
-        if not validateEmail(email):
-            raise forms.ValidationError({'email': 'Invalid Email'})
-
-        if password != confirmPassword:
-            data['password'] = ''
-            data['confirmPassword'] = ''
-            raise forms.ValidationError({'password': 'Password and Confirm Password does not Match.'})
-
+        datepicker = data.get('dateOfBirth')
         if phoneNumber is not None and len(str(phoneNumber)) != 0 and len(str(phoneNumber)) != 10:
             raise forms.ValidationError({'phoneNumber': 'Phone Number is Invalid. Contain only 10 digit'})
 
-        if datepicker != '' and bool(
-                re.search('^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$', datepicker)) != True:
-            raise forms.ValidationError({'datepicker': 'Invalid date please Insert in mm/dd/yyyy '})
+        if datepicker != None and bool(
+                re.search('^([0-9]{4})-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$', str(datepicker))) != True:
+            raise forms.ValidationError({'dateOfBirth': 'Invalid date please Insert in yyyy-mm-dd '})
         return data
 
     def save(self, commit=True):
         data = self.cleaned_data
-        userProfile =UserProfile.objects.filter(data.get('email')).first()
+        userProfile = UserProfile.objects.filter(email=data.get('email')).first()
         userProfile.firstName = data.get('firstName')
         userProfile.lastName = data.get('lastName')
         userProfile.phoneNumber = data.get('phoneNumber') if 'phoneNumber' in data else 0
-        userdate = data.get('datepicker')
-        if userdate != '':
-            userdate = datetime.datetime.strptime(userdate, "%m/%d/%Y").strftime("%Y-%m-%d")
-            userProfile.dateOfBirth = userdate
-        userProfile.street1 = data.get('street_number')
-        userProfile.street2 = data.get('route')
-        userProfile.street3 = data.get('locality')
-        userProfile.state = data.get('administrative_area_level_1')
+        userProfile.dateOfBirth =  data.get('dateOfBirth')
+        userProfile.street1 = data.get('street1')
+        userProfile.street2 = data.get('street2')
+        userProfile.street3 = data.get('street3')
+        userProfile.state = data.get('state')
         userProfile.country = data.get('country')
-        userProfile.zip = data.get('postal_code')
-        return userProfile
+        userProfile.zip = data.get('zip')
+
+        if commit:
+            userProfile.save()
 
 
 class SignUpForm(forms.ModelForm):
@@ -140,9 +129,9 @@ class SignUpForm(forms.ModelForm):
         if phoneNumber is not None and len(str(phoneNumber)) != 0 and len(str(phoneNumber)) != 10:
             raise forms.ValidationError({'phoneNumber': 'Phone Number is Invalid. Contain only 10 digit'})
 
-        if datepicker != '' and bool(
-                re.search('^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$', datepicker)) != True:
-            raise forms.ValidationError({'datepicker': 'Invalid date please Insert in mm/dd/yyyy '})
+        if datepicker != None and bool(
+                re.search('^([0-9]{4})-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$', str(datepicker))) != True:
+            raise forms.ValidationError({'datepicker': 'Invalid date please Insert in yyyy-mm-dd '})
 
         user = UserProfile.objects.filter(email=email).first()
         if user:
@@ -157,10 +146,7 @@ class SignUpForm(forms.ModelForm):
         userProfile.firstName = data.get('firstName')
         userProfile.lastName = data.get('lastName')
         userProfile.phoneNumber = data.get('phoneNumber') if 'phoneNumber' in data else 0
-        userdate = data.get('datepicker')
-        if userdate != '':
-            userdate = datetime.datetime.strptime(userdate, "%m/%d/%Y").strftime("%Y-%m-%d")
-            userProfile.dateOfBirth = userdate
+        userProfile.dateOfBirth = data.get('datepicker')
         userProfile.street1 = data.get('street_number')
         userProfile.street2 = data.get('route')
         userProfile.street3 = data.get('locality')
@@ -170,6 +156,3 @@ class SignUpForm(forms.ModelForm):
 
         if commit:
             userProfile.save()
-
-
-
