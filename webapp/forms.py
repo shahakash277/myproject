@@ -51,7 +51,7 @@ class ProfileEditForm(forms.ModelForm):
     state = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'id': 'administrative_area_level_1', 'placeholder': 'ity, Village'}))
     country = forms.CharField(required=False, widget=forms.TextInput(attrs={'id': 'country', 'placeholder': 'Conutry'}))
-    zip = forms.CharField(required=False, widget=forms.TextInput(
+    zip = forms.IntegerField(required=False, widget=forms.NumberInput(
         attrs={'id': 'postal_code', 'placeholder': 'zip code, postal code.'}))
 
     class Meta:
@@ -66,7 +66,7 @@ class ProfileEditForm(forms.ModelForm):
         if phoneNumber is not None and len(str(phoneNumber)) != 0 and len(str(phoneNumber)) != 10:
             raise forms.ValidationError({'phoneNumber': 'Phone Number is Invalid. Contain only 10 digit'})
 
-        if datepicker != None and bool(
+        if datepicker != '' and bool(
                 re.search('^([0-9]{4})-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$', str(datepicker))) != True:
             raise forms.ValidationError({'dateOfBirth': 'Invalid date please Insert in yyyy-mm-dd '})
         return data
@@ -77,13 +77,13 @@ class ProfileEditForm(forms.ModelForm):
         userProfile.firstName = data.get('firstName')
         userProfile.lastName = data.get('lastName')
         userProfile.phoneNumber = data.get('phoneNumber') if 'phoneNumber' in data else 0
-        userProfile.dateOfBirth =  data.get('dateOfBirth')
+        userProfile.dateOfBirth =  data.get('dateOfBirth') if 'dateOfBirth' !='' in data else None
         userProfile.street1 = data.get('street1')
         userProfile.street2 = data.get('street2')
         userProfile.street3 = data.get('street3')
         userProfile.state = data.get('state')
         userProfile.country = data.get('country')
-        userProfile.zip = data.get('zip')
+        userProfile.zip = data.get('zip') if 'zip' in data else 0
 
         if commit:
             userProfile.save()
@@ -103,7 +103,7 @@ class SignUpForm(forms.ModelForm):
     administrative_area_level_1 = forms.CharField(required=False, widget=forms.TextInput(
         attrs={'id': 'administrative_area_level_1', 'placeholder': 'ity, Village'}))
     country = forms.CharField(required=False, widget=forms.TextInput(attrs={'id': 'country', 'placeholder': 'Conutry'}))
-    postal_code = forms.CharField(required=False, widget=forms.TextInput(
+    postal_code = forms.IntegerField(required=False, widget=forms.NumberInput(
         attrs={'id': 'postal_code', 'placeholder': 'zip code, postal code.'}))
 
     class Meta:
@@ -129,9 +129,9 @@ class SignUpForm(forms.ModelForm):
         if phoneNumber is not None and len(str(phoneNumber)) != 0 and len(str(phoneNumber)) != 10:
             raise forms.ValidationError({'phoneNumber': 'Phone Number is Invalid. Contain only 10 digit'})
 
-        if datepicker != None and bool(
+        if datepicker != '' and bool(
                 re.search('^([0-9]{4})-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$', str(datepicker))) != True:
-            raise forms.ValidationError({'datepicker': 'Invalid date please Insert in yyyy-mm-dd '})
+            raise forms.ValidationError({'datepicker': 'Invalid date please Insert in yyyy-mm-dd '+datepicker})
 
         user = UserProfile.objects.filter(email=email).first()
         if user:
@@ -146,13 +146,13 @@ class SignUpForm(forms.ModelForm):
         userProfile.firstName = data.get('firstName')
         userProfile.lastName = data.get('lastName')
         userProfile.phoneNumber = data.get('phoneNumber') if 'phoneNumber' in data else 0
-        userProfile.dateOfBirth = data.get('datepicker')
+        userProfile.dateOfBirth = data.get('datepicker')if 'datepicker' !='' in data else None
         userProfile.street1 = data.get('street_number')
         userProfile.street2 = data.get('route')
         userProfile.street3 = data.get('locality')
         userProfile.state = data.get('administrative_area_level_1')
         userProfile.country = data.get('country')
-        userProfile.zip = data.get('postal_code')
+        userProfile.zip = data.get('postal_code') if 'postal_code' in data else 0
 
         if commit:
             userProfile.save()
