@@ -6,9 +6,45 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script type="text/javascript"  src="{% static 'Toast.js' %}"></script>
     <title>Login</title>
+    <script>
+
+$(document).ready(function () {
+        //settimeout function, delays notification, amount of time to delay at the end of the code (1000 = 1 second)
+        setTimeout(function () {
+
+            $.toast({
+                //info displayed, can use href for linkable toast
+                title: document.getElementById("msg").value,
+                //how long toast stays on the screen
+                duration: 3000,
+                //width of notification
+                width: 'auto',
+                //height of notification
+                height: '28px',
+                //background color
+                backgroundColor: '#17a2b8',
+                //text color
+                textColor: 'white',
+                //value of line height
+                lineheight: '1.8',
+                //position, top, middle, bottom, all customizable in JS
+                position: 'top'
+            });
+            //setTimeout delay time
+        }, 100);
+    });
+
+    </script>
+
 </head>
 <body>
+{% if messages %}
+    {% for message in messages %}
+        <input type="text" id="msg" value="{{ message }}" hidden/>
+    {% endfor %}
+{% endif %}
 	<div id="login">
     <h3 class="text-center text-white pt-5">Login form</h3>
       <div class="container">

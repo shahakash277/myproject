@@ -73,7 +73,6 @@ def checkIsAuthorized(session):
 
 def LogOutResponse(request):
     request.session['username'] = ''
-    request.session['passeord'] = ''
-    login_form = UserLoginForm()
-
+    request.session['password'] = ''
+    messages.success(request, 'Logout successfully')
     return redirect('/login')

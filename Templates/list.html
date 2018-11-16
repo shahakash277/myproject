@@ -54,7 +54,6 @@ $(document).ready(function () {
     {% for message in messages %}
         <input type="text" id="msg" value="{{ message }}" hidden/>
     {% endfor %}
-</ul>
 {% endif %}
     <form action="" method="post">
         {% csrf_token %}
