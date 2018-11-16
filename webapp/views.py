@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import UserLoginForm, ProfileEditForm, SignUpForm
 from .models import UserProfile
+from django.contrib import messages
 
 
 # Create your views here.
@@ -11,6 +12,7 @@ def LoginRequest(request):
             data = login_form.cleaned_data
             request.session['username'] = data.get('email')
             request.session['password'] = data.get('password')
+            messages.success(request, 'Login successfully')
             return redirect('/list')
         else:
             return render(request, 'login.html', {'form': login_form})
@@ -26,6 +28,7 @@ def EditRequest(request):
             edit_form = ProfileEditForm(data=request.POST)
             if edit_form.is_valid():
                 edit_form.save()
+                messages.success(request, 'Edit successfully')
                 return redirect('/list')
             else:
                 return render(request, 'edit.html', {'form': edit_form})
@@ -43,6 +46,7 @@ def SignupRequest(request):
             request.session['username'] = signup_form.cleaned_data['email']
             request.session['password'] = signup_form.cleaned_data['password']
             signup_form.save()
+            messages.success(request, 'Register successfully')
             return redirect('/list')
         else:
             return render(request, 'signup.html', {'form': signup_form})
@@ -71,4 +75,5 @@ def LogOutResponse(request):
     request.session['username'] = ''
     request.session['passeord'] = ''
     login_form = UserLoginForm()
+
     return redirect('/login')

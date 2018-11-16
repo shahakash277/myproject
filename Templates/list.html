@@ -10,17 +10,52 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <script type="text/javascript"  src="{% static 'Toast.js' %}"></script>
+
     <script>
+
+$(document).ready(function () {
+        //settimeout function, delays notification, amount of time to delay at the end of the code (1000 = 1 second)
+        setTimeout(function () {
+
+            $.toast({
+                //info displayed, can use href for linkable toast
+                title: document.getElementById("msg").value,
+                //how long toast stays on the screen
+                duration: 3000,
+                //width of notification
+                width: 'auto',
+                //height of notification
+                height: '28px',
+                //background color
+                backgroundColor: '#17a2b8',
+                //text color
+                textColor: 'white',
+                //value of line height
+                lineheight: '1.8',
+                //position, top, middle, bottom, all customizable in JS
+                position: 'top'
+            });
+            //setTimeout delay time
+        }, 100);
+    });
+
         $(document).ready( function () {
             $('#example').DataTable({searching: false, paging: false, info: false});
         } );
+
     </script>
 </head>
 <body style="background:none">
 <h1></h1>
 <button class="btn btn-info btn-md" onclick="window.location.href='/edit'">Edit Profile</button>
 <button class="btn btn-info btn-md" onclick="window.location.href='/logout'">Log out</button>
-
+{% if messages %}
+    {% for message in messages %}
+        <input type="text" id="msg" value="{{ message }}" hidden/>
+    {% endfor %}
+</ul>
+{% endif %}
     <form action="" method="post">
         {% csrf_token %}
 
