@@ -16,6 +16,8 @@ body {
   margin-top: -85px;
 }
 
+
+
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
 article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
 ol,ul{list-style:none;margin:0px;padding:0px;}
@@ -83,7 +85,7 @@ label.header-w3l {
     margin-bottom: 10px;
     width: 100%;
 }
-.form-control-w3 input[type="email"], .form-control-w3 input[type="text"], .form-sub-1-w3l input, .form-sub-1-w3l select{
+.form-control-w3 input[type="email"], .form-control-w3 input[type="text"], .form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"], .form-sub-1-w3l input, .form-sub-1-w3l select{
     border: none;
     color: #fff;
     outline: none;
@@ -186,7 +188,7 @@ ul li .check::before {
     -webkit-transition: background 0.25s linear;
 }
 span {
-    color: #fff;
+    color: black;
 }
 .grid-shop1-agile ul li,.grid-shop2-agile ul li{
 	color: #fff;
@@ -226,27 +228,6 @@ input[type=radio]:checked ~ label{
 }
 /*-- //placeholder --*/
 /*-- copyright --*/
-p.copyright {
-    font-size: 15px;
-    text-align: center;
-    color: #fff;
-    margin:39px 0;
-    letter-spacing: 2px;
-}
-p.copyright a {
-    color:#36d4f4;
-    transition: all 0.5s ease-in-out;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-}
-p.copyright a:hover {
-    color:#fff;
-    transition: all 0.5s ease-in-out;
-    -webkit-transition: all 0.5s ease-in-out;
-    -moz-transition: all 0.5s ease-in-out;
-    -o-transition: all 0.5s ease-in-out;
-}
 /*-- //copyright --*/
 
 /*--responsive--*/
@@ -256,7 +237,7 @@ p.copyright a:hover {
     }
 }
 @media(max-width: 1366px){
-    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"]{
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"],.form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"]{
         width: 93%;
     }
     .form-sub-1-w3l input {
@@ -275,7 +256,7 @@ p.copyright a:hover {
     .content-agile{
         width: 70%;
     }
-    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"]{
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"].form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"]{
         width: 92.5%;
     }
     p.copyright {
@@ -329,7 +310,7 @@ p.copyright a:hover {
         width: 85%;
         padding: 30px;
     }
-    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] ,.form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"]{
         width: 91.5%;
     }
 }
@@ -347,7 +328,7 @@ p.copyright a:hover {
         width: 70%;
         padding: 35px;
     }
-    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"],.form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"] {
         width: 94.5%;
     }
     .form-sub-1-w3l input {
@@ -381,7 +362,7 @@ p.copyright a:hover {
     .form-sub-1-w3l input {
         width: 81%;
     }
-    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"],.form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"] {
         width: 94%;
     }
     h1.header-w3l {
@@ -425,7 +406,7 @@ p.copyright a:hover {
     }
 }
 @media(max-width: 440px){
-    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"],.form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"] {
         width: 93%;
     }
     .form-sub-1-w3l {
@@ -454,12 +435,12 @@ p.copyright a:hover {
     .form-sub-1-w3l input {
         width: 74%;
     }
-    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"],.form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"] {
         width: 91.5%;
     }
 }
 @media(max-width: 384px){
-    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] ,.form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"]{
         width: 91%;
     }
     .form-sub-1-w3l {
@@ -506,7 +487,7 @@ p.copyright a:hover {
         font-size: 13px;
         margin-top: 18px;
     }
-    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"] {
+    .form-control-w3 input[type="email"], .form-control-w3 input[type="text"],.form-control-w3 input[type="password"] ,.form-control-w3 input[type="number"] {
         width: 90%;
     }
     .form-sub-1-w3l input {

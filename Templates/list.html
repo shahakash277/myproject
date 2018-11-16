@@ -8,14 +8,15 @@
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <script>
         $(document).ready( function () {
             $('#example').DataTable({searching: false, paging: false, info: false});
         } );
     </script>
 </head>
-<body>
+<body style="background:none">
 <h1></h1>
 <button class="btn btn-info btn-md" onclick="window.location.href='/edit'">Edit Profile</button>
 <button class="btn btn-info btn-md" onclick="window.location.href='/logout'">Log out</button>
